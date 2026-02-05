@@ -16,6 +16,11 @@ class Vancouver_Sunrise extends Plugin
         $host->add_hook($host::HOOK_MAIN_TOOLBAR_BUTTON, $this);
     }
 
+    function get_js()
+    {
+        return file_get_contents(__DIR__ . "/init.js");
+    }
+
     function get_css()
     {
         return file_get_contents(__DIR__ . "/init.css");
@@ -23,18 +28,29 @@ class Vancouver_Sunrise extends Plugin
 
     function hook_main_toolbar_button()
     {
+        echo $this->render_toolbar_html();
+    }
+
+    function update()
+    {
+        echo $this->render_toolbar_html();
+    }
+
+    private function render_toolbar_html()
+    {
         $data = $this->get_daylight_info(time());
         if (!$data)
             return "";
 
-        echo "<span class='vancouver-sunrise-container' title='Vancouver Daylight Info'>";
-        echo "🌅 " . $data['civil_twilight_start'] . " | ";
-        echo "☀️ " . $data['sunrise'] . " | ";
-        echo "🌇 " . $data['sunset'] . " | ";
-        echo "🌃 " . $data['civil_twilight_end'] . " | ";
-        echo "⏱️ " . $data['total_daylight'] . " | ";
-        echo ($data['change_direction'] == 'up' ? "📈 " : "📉 ") . $data['daylight_change'];
-        echo "</span>";
+        $html = "<span class='vancouver-sunrise-container' title='Vancouver Daylight Info'>";
+        $html .= "🌅 " . $data['civil_twilight_start'] . " | ";
+        $html .= "☀️ " . $data['sunrise'] . " | ";
+        $html .= "🌇 " . $data['sunset'] . " | ";
+        $html .= "🌃 " . $data['civil_twilight_end'] . " | ";
+        $html .= "⏱️ " . $data['total_daylight'] . " | ";
+        $html .= ($data['change_direction'] == 'up' ? "📈 " : "📉 ") . $data['daylight_change'];
+        $html .= "</span>";
+        return $html;
     }
 
     public function get_daylight_info($timestamp)
