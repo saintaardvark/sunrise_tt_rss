@@ -5,14 +5,5 @@ run = "/usr/bin/php vancouver_sunrise/test_parser.php"
 [tasks.publish]
 description = "Package and upload the plugin to the server"
 run = """
-tar -czf vancouver_sunrise.tar.gz vancouver_sunrise/
-echo "Uploading to server..."
-# Placeholder for scp - replace 'user@host' with actual values
-# scp vancouver_sunrise.tar.gz user@host:/tmp
-echo ""
-echo "--- SERVER SIDE INSTRUCTIONS ---"
-echo "1. ssh into the server"
-echo "2. run: tar -xzf /tmp/vancouver_sunrise.tar.gz -C /path/to/ttrss/plugins.local/"
-echo "3. Ensure permissions are correct: chown -R www-data:www-data /path/to/ttrss/plugins.local/vancouver_sunrise"
-echo "4. Enable the plugin in tt-rss Preferences"
+rsync -avr ./vancouver_sunrise/. l2:/usr/share/tt-rss/www/plugins/vancouver_sunrise/
 """
