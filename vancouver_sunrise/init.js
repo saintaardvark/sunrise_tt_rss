@@ -1,13 +1,13 @@
-(function() {
+(function () {
     let lastDate = new Date().toDateString();
 
     const updateDaylightInfo = () => {
         const currentDate = new Date().toDateString();
-        
+
         if (currentDate !== lastDate) {
             console.log("Vancouver Sunrise: Date changed, updating toolbar...");
-            
-            App.apiRequest("vancouver_sunrise", "update", {}, (reply) => {
+
+            xhr.post("backend.php", App.getPostReply({ op: "pluginhandler", plugin: "vancouver_sunrise", method: "update" }), (reply) => {
                 const container = document.querySelector(".vancouver-sunrise-container");
                 if (container && reply.responseText) {
                     // Update the inner content or replace the container
