@@ -7,3 +7,10 @@ description = "Package and upload the plugin to the server"
 run = """
 rsync -avr ./vancouver_sunrise/. l2:/usr/share/tt-rss/www/plugins/vancouver_sunrise/
 """
+
+[tasks.format]
+description = "Format JavaScript and CSS files"
+run = "mise x npm:prettier -- prettier --write vancouver_sunrise/*.js vancouver_sunrise/*.css"
+
+[tools]
+node = "20"
