@@ -2,10 +2,11 @@
 
 A standalone plugin for [Tiny Tiny RSS](https://tt-rss.org/) that displays daily Vancouver daylight information (twilight, sunrise, sunset) in the header toolbar.
 
+Coded with LLMs.  Released under BSD license.
+
 ## Features
 - Displays Civil Twilight Start | Sunrise | Sunset | Civil Twilight End | Total Daylight | Daylight Change.
 - Automatically handles Vancouver Daylight Savings Time (+1h offset).
-- Sleek CSS styling for a modern look.
 
 ## Project Structure
 - `vancouver_sunrise/`: The plugin source code.
@@ -24,6 +25,12 @@ mise run test
 
 # Package the plugin for publishing
 mise run publish
+
+# Format JS/CSS
+mise run format
+
+# Update data
+mise fetch-data
 ```
 
 ## Installation
