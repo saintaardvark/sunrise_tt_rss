@@ -32,4 +32,12 @@
 
     // Check every 5 minutes
     setInterval(updateDaylightInfo, 1000 * 60 * 5);
+
+    // Expose for manual console triggering:
+    //   VancouverSunrise.update()       — runs only if date has changed
+    //   VancouverSunrise.forceUpdate()  — always fires the XHR
+    window.VancouverSunrise = {
+        update: updateDaylightInfo,
+        forceUpdate: () => { lastDate = null; updateDaylightInfo(); },
+    };
 })();

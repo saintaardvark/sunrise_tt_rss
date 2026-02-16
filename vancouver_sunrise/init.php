@@ -14,6 +14,7 @@ class Vancouver_Sunrise extends Plugin
     {
         $this->host = $host;
         $host->add_hook($host::HOOK_MAIN_TOOLBAR_BUTTON, $this);
+        $host->add_handler("vancouver_sunrise", "update", $this);
     }
 
     function get_js()
