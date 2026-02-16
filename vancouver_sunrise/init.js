@@ -7,18 +7,14 @@
         if (currentDate !== lastDate) {
             console.log("Vancouver Sunrise: Date changed, updating toolbar...");
 
-            xhr.post(
+            xhrPost(
                 "backend.php",
-                {
-                    op: "pluginhandler",
-                    plugin: "vancouver_sunrise",
-                    method: "update",
-                },
-                (reply) => {
+                App.getPhArgs("vancouver_sunrise", "update"),
+                (transport) => {
                     const container = document.querySelector(".vancouver-sunrise-container");
-                    if (container && reply) {
+                    if (container && transport.responseText) {
                         const temp = document.createElement("div");
-                        temp.innerHTML = reply;
+                        temp.innerHTML = transport.responseText;
                         const newContainer = temp.firstChild;
                         if (newContainer) {
                             container.parentNode.replaceChild(newContainer, container);
