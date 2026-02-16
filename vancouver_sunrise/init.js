@@ -9,7 +9,11 @@
 
             xhrPost(
                 "backend.php",
-                App.getPhArgs("vancouver_sunrise", "update"),
+                {
+                    op: "pluginhandler",
+                    plugin: "vancouver_sunrise",
+                    method: "update",
+		},
                 (transport) => {
                     const container = document.querySelector(".vancouver-sunrise-container");
                     if (container && transport.responseText) {
