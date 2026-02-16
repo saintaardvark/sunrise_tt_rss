@@ -13,7 +13,7 @@
                     op: "pluginhandler",
                     plugin: "vancouver_sunrise",
                     method: "update",
-		},
+                },
                 (transport) => {
                     const container = document.querySelector(".vancouver-sunrise-container");
                     if (container && transport.responseText) {
@@ -38,6 +38,9 @@
     //   VancouverSunrise.forceUpdate()  — always fires the XHR
     window.VancouverSunrise = {
         update: updateDaylightInfo,
-        forceUpdate: () => { lastDate = null; updateDaylightInfo(); },
+        forceUpdate: () => {
+            lastDate = null;
+            updateDaylightInfo();
+        },
     };
 })();
