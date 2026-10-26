@@ -1,5 +1,5 @@
 [tasks.test]
-description = "Run plugin parsing and DST logic tests"
+description = "Run plugin parsing and time offset tests"
 run = "/usr/bin/php vancouver_sunrise/test_parser.php"
 
 [tasks.publish]

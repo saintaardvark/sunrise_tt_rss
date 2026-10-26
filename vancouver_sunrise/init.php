@@ -3,6 +3,10 @@
 class Vancouver_Sunrise extends Plugin
 {
 
+    // The CSV holds standard time (UTC-8). BC now stays on permanent summer
+    // time (UTC-7), so every displayed time is shifted by one hour.
+    private const UTC_OFFSET_SECONDS = 3600;
+
     private $host;
 
     function about()
@@ -69,13 +73,11 @@ class Vancouver_Sunrise extends Plugin
         if (!$today_data)
             return null;
 
-        $dst_offset = $this->is_dst($timestamp) ? 3600 : 0;
-
         $result = [
-            'civil_twilight_start' => $this->format_csv_time($today_data['Civil Twilight Start'], $dst_offset),
-            'sunrise' => $this->format_csv_time($today_data['Sun rise'], $dst_offset),
-            'sunset' => $this->format_csv_time($today_data['Sun set'], $dst_offset),
-            'civil_twilight_end' => $this->format_csv_time($today_data['Civil Twilight End'], $dst_offset),
+            'civil_twilight_start' => $this->format_csv_time($today_data['Civil Twilight Start'], self::UTC_OFFSET_SECONDS),
+            'sunrise' => $this->format_csv_time($today_data['Sun rise'], self::UTC_OFFSET_SECONDS),
+            'sunset' => $this->format_csv_time($today_data['Sun set'], self::UTC_OFFSET_SECONDS),
+            'civil_twilight_end' => $this->format_csv_time($today_data['Civil Twilight End'], self::UTC_OFFSET_SECONDS),
         ];
 
         // Calculate total daylight
@@ -142,13 +144,6 @@ class Vancouver_Sunrise extends Plugin
         $h = floor($seconds / 3600);
         $m = floor(($seconds % 3600) / 60);
         return "{$h}h {$m}m";
-    }
-
-    public function is_dst($timestamp)
-    {
-        $date = date("Y-m-d", $timestamp);
-        // Vancouver 2026: March 8 to Nov 1
-        return ($date >= "2026-03-08" && $date < "2026-11-01");
     }
 
     function api_version()
