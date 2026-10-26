@@ -6,7 +6,7 @@ Coded with LLMs.  Released under BSD license.
 
 ## Features
 - Displays Civil Twilight Start | Sunrise | Sunset | Civil Twilight End | Total Daylight | Daylight Change.
-- Automatically handles Vancouver Daylight Savings Time (+1h offset).
+- Shifts the CSV's standard times by +1h to match BC's permanent summer time (no DST switch).
 
 ## Project Structure
 - `vancouver_sunrise/`: The plugin source code.
